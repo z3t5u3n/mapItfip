@@ -1,0 +1,299 @@
+/* Globales */
+:root {
+    --color-principal-texto: #2c3e50;
+    --color-secundario-texto: #555;
+    --color-resaltado: #007bff;
+    --color-exito: #28a745;
+    --color-fondo-claro: #f8f9fa;
+    --sombra-suave: 0 4px 15px rgba(0, 0, 0, 0.1);
+    --sombra-profunda: 0 8px 30px rgba(0, 0, 0, 0.2);
+    --borde-radio: 8px;
+}
+
+/* Contenedor principal de la interfaz, sin cambios */
+.divInterfaz {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Contenedor principal del componente de datos */
+.divDatoUsuario {
+    z-index: 0;
+    position: fixed;
+    top: 10vh;
+    right: 0;
+    width: 90%;
+    max-width: 80%;
+    height: 90vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    transition: all 0.5s ease-in-out;
+    /* Transición para el cambio de tamaño */
+}
+
+/* Estilo de pantalla completa (manteniendo la transición) */
+.divDatoUsuarioFullScreen {
+    width: 100%;
+    max-width: 100%;
+}
+
+/* Fondo con efecto de desenfoque y semi-transparencia */
+.divFilter-3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px) brightness(0.85);
+    /* Desenfoque más intenso, brillo más sutil */
+    box-shadow: var(--sombra-profunda);
+    z-index: 0;
+    border: none;
+    border-radius: var(--borde-radio);
+    transition: backdrop-filter 0.5s ease;
+}
+
+/* Contenido de la tarjeta de usuario */
+.contentDatoUsuario {
+    overflow-y: auto;
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 40px;
+    /* Aumento de padding para más espacio */
+    border-radius: 16px;
+    /* Bordes más redondeados */
+    box-shadow: var(--sombra-suave);
+    text-align: center;
+    color: var(--color-principal-texto);
+    font-family: 'Roboto', sans-serif;
+    /* Fuente moderna */
+}
+
+.contentDatoUsuario>h2 {
+    font-size: 2.5em;
+    /* Título más grande */
+    color: var(--color-principal-texto);
+    margin-bottom: 30px;
+    /* Aumento de margen */
+    font-weight: 700;
+}
+input[type="email"]{
+    padding: 10px 5px;
+}
+.contentDatoUsuario>p {
+    font-size: 1.1em;
+    color: var(--color-secundario-texto);
+    margin-bottom: 12px;
+    /* Margen ligeramente mayor */
+    line-height: 1.8;
+    /* Mayor espacio entre líneas para mejor lectura */
+}
+
+.contentDatoUsuario strong {
+    color: var(--color-resaltado);
+    font-weight: 600;
+}
+
+/* Estilos para el select (dropdown) de rol */
+.role-selector-container {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #e0e0e0;
+    /* Separador más claro */
+}
+
+.role-selector-container label {
+    display: block;
+    font-size: 1.2em;
+    /* Texto de etiqueta más grande */
+    color: var(--color-secundario-texto);
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.role-selector-container select {
+    width: 80%;
+    padding: 12px 20px;
+    /* Aumento de padding */
+    border: 1px solid #ced4da;
+    border-radius: var(--borde-radio);
+    background-color: var(--color-fondo-claro);
+    font-size: 1em;
+    color: var(--color-secundario-texto);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%2C197.3L159.2%2C69.4c-3.6-3.6-9.4-3.6-13%2C0L5.4%2C197.3c-3.6%2C3.6-3.6%2C9.4%2C0%2C13l13%2C13c3.6%2C3.6%2C9.4%2C3.6%2C13%2C0l114.8-114.8c3.6-3.6%2C9.4-3.6%2C13%2C0L261%2C223.3c3.6%2C3.6%2C9.4%2C3.6%2C13%2C0l13-13C290.6%2C206.7%2C290.6%2C200.9%2C287%2C197.3z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    /* Transición suave en foco */
+}
+
+.role-selector-container select:focus {
+    border-color: var(--color-resaltado);
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* Estilos para el botón de guardar */
+.save-role-button {
+    margin-top: 25px;
+    padding: 14px 30px;
+    /* Aumento de padding para un botón más grande */
+    background-color: var(--color-exito);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    /* Bordes más redondeados */
+    font-size: 1.2em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.15s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.save-role-button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    /* Efecto 3D sutil */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.save-role-button:active {
+    background-color: #1e7e34;
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Mensajes de estado (éxito/error) */
+.status-message {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 500;
+}
+
+.status-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+@media(max-width: 768px) {
+    .divDatoUsuario {
+        width: 100%;
+        max-width: 100%;
+        right: auto;
+        padding: 0;
+    }
+
+    .contentDatoUsuario {
+        width: 100%;
+        height: 100vh;
+        background: transparent;
+        padding: 40px;
+    }
+
+    .contentDatoUsuario>h2 {
+        font-size: 1.5em;
+    }
+}
+/**/
+.reporte-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.reporte-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.reporte-modal h2 {
+  margin-bottom: 15px;
+}
+
+.reporte-modal label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.reporte-modal select,
+.SearchInput {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-enviar {
+  background: #007bff;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-cerrar {
+  background: #dc3545;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/**/
+.btn-report{
+    font-size: 5vh;
+    position: absolute;
+    right: 5px;
+    top: 10vh;
+    border: none;
+    background: transparent;
+}

@@ -1,0 +1,525 @@
+/* ============================================================ */
+/* 🔹 GLOBALES Y CONTENEDOR PRINCIPAL (.divMapa) */
+/* ============================================================ */
+.divMapa {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    /* Considera 100vh para que ocupe toda la altura disponible inicialmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.divMapa-1 {
+    height: 100vh;
+}
+
+/* El componente Unity se renderiza directamente, estas reglas podrían no ser necesarias si lo usas directamente */
+/* .divUnityRender .ConteinerUnity .Unity {
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    border: 1px solid black;
+} */
+
+/* ============================================================ */
+/* 🔹 ELEMENTOS DE CONTROL FLOTANTES (OptionMapa, SidebarMapa) */
+/* ============================================================ */
+.OptionMapa,
+.SidebarMapa,
+.divSidebar {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: auto !important;
+    transition: 0.5s ease;
+}
+
+.OptionMapa {
+    padding: 10px;
+    width: auto;
+    height: auto;
+    bottom: 11vh;
+    left: 20vw;
+    bottom: 12vh;
+}
+
+/* Base para el Sidebar principal */
+.SidebarMapa {
+    bottom: 0vh;
+    width: 80%;
+    height: auto;
+    right: 0;
+    overflow: hidden;
+}
+
+/* Reglas de transición para el modo FullScreen */
+.OptionMapaFullScreen {
+    left: 0;
+    transition: 1s ease;
+}
+
+.SidebarMapaFullScreen {
+    width: 100%;
+    transition: 1s ease;
+}
+
+/* ============================================================ */
+/* 🔹 SIDEBAR LATERAL (divSidebar) - Movimiento lateral */
+/* ============================================================ */
+.divSidebar {
+    left: 0;
+    top: 10vh;
+    width: 20vw;
+    height: 90vh;
+    box-shadow: 0 0 5px black;
+    z-index: 1;
+}
+
+.divSidebarHidden {
+    left: -20vw;
+    transition: 0.5s ease;
+}
+
+/* Botón del Sidebar */
+.btnSidebar {
+    font-size: 4vh;
+    background: #007bff;
+    position: absolute;
+    padding: 5px 10px;
+    color: white;
+    text-shadow: var(--Sombra_1);
+    border: none;
+    border-bottom: 1px solid red;
+    right: 1vh;
+    /*-6*/
+    top: 1px;
+    z-index: 1;
+    transition: 0.5s ease;
+}
+
+.btnSidebarHidde {
+    right: -6vh;
+    transition: 0.5s ease;
+    backdrop-filter: blur(10px);
+    border: none;
+    box-shadow: 0 0 5px black;
+}
+
+/* Filtro de fondo para Sidebar y otros elementos */
+.divFilter-1 {
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(20px);
+    border: 1px solid black;
+    box-shadow: 0 0 5px black;
+    z-index: 1;
+}
+
+.divFilter-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(20px);
+    border: 1px solid black;
+    box-shadow: 0 0 5px black;
+    z-index: 1;
+}
+
+/* Sidebar Menu*/
+.SidebarMenu {
+    position: relative;
+    width: 80%;
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 2;
+}
+
+.SidebarMenu-btn {
+    font-size: 3vh;
+    margin: 10px 0;
+    width: 100%;
+    padding: 7.5px 0;
+    background: #007bff;
+    border: none;
+    border-bottom: 2PX solid red;
+    /* border-radius: 10px; */
+    color: red;
+}
+
+/* .logout{
+    padding: 0;
+    font-size: 3vh;
+    width: auto;
+    height: auto;
+    color: #ff0000;
+    border-radius: 0 !important;
+    border-bottom: 2px solid #ff0000;
+    background: transparent;
+} */
+
+
+/* ============================================================ */
+/* 🔹 MENÚ INFERIOR (divContetMenuMapa) */
+/* ============================================================ */
+.divContetMenuMapa {
+    position: relative;
+    padding: 20px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.divMenuBtn {
+    position: relative;
+    padding: auto 0;
+    margin: 0 10px;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.divMenuBtn>button {
+    font-size: 4vh;
+    /* position: absolute; */
+    background: #007bff;
+    bottom: 1vh;
+    width: auto;
+    padding: 5px 20px;
+    border: none;
+    border-bottom: 2px solid blue;
+    color: white;
+    text-shadow: var(--Sombra_2);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.divMenuBtn>button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.divCancas {
+    /* overflow: hidden; */
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+
+/* ============================================================ */
+/* 🔹 CONTROL DE VELOCIDAD Y MODO */
+/* ============================================================ */
+.SpeedControl {
+    font-size: 4vh;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    width: 100%;
+    height: 6vh;
+}
+
+.ModoRecorrer {
+    width: auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.ModoRecorrer>label {
+    font-size: 3vh;
+    margin-right: 7.5px;
+    color: white;
+    text-shadow: var(--Sombra_1);
+}
+
+.ModoRecorrer>button {
+    border: none;
+    font-size: 3vh;
+    color: white;
+    text-shadow: var(--Sombra_2);
+    background: transparent;
+    cursor: pointer;
+}
+
+.ModoRecorrer>button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.SpeedControl>button {
+    font-size: 3vh;
+    margin: 0 10px;
+    width: auto;
+    height: auto;
+    padding: 5px;
+    color: white;
+    text-shadow: var(--Sombra_2);
+    background: transparent;
+    border: none;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.SpeedControl>button:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.SpeedControl>span {
+    margin-left: 10px;
+    z-index: 1;
+    color: white;
+    text-shadow: var(--Sombra_1);
+}
+
+.SpeedButton.Active {
+    border: 2px solid blue;
+    border-radius: 5px;
+}
+
+
+/* ============================================================ */
+/* 🔹 BARRA DE BÚSQUEDA (Searche) */
+/* ============================================================ */
+.Searche {
+    position: fixed;
+    top: 12.5vh;
+    width: 20%;
+    height: auto;
+    display: flex;
+    background: white;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+.SearcheFullScreen {
+    top: 1.25vh;
+}
+
+.SearchInput {
+    width: 100%;
+    height: 30px;
+    font-size: 3vh;
+    color: black;
+    padding: 5px 20px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    z-index: 1;
+}
+
+.SearchResults {
+    /* position: absolute; */
+    background: rgba(0, 0, 0, 0.75);
+    top: 100%;
+    width: 100%;
+    height: 40vh;
+    z-index: 10;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+.SearchResults>button {
+    font-size: 2.5vh;
+    color: white;
+    text-shadow: var(--Sombra_2);
+    width: 100%;
+    padding: 10px 0;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.2s ease;
+}
+
+.SearchResults>button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.btnSceenFull {
+    position: fixed;
+    width: 5vh;
+    height: 5vh;
+    top: 11vh;
+    right: 1vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    background-color: transparent;
+    cursor: pointer;
+    z-index: 0;
+    /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); */
+}
+
+.btnSceenFull-1 {
+    top: 1.25vh;
+}
+
+.btnSceenFull>img {
+    width: 5vh;
+    height: 5vh;
+    z-index: 1;
+}
+
+.info-message-sidebar {
+    position: absolute;
+}
+
+
+/* ============================================================ */
+/* 🛰️ ESTILOS PARA GPS */
+/* ============================================================ */
+.GPSControl {
+    position: absolute;
+    top: 7.5vh;
+    right: 0;
+    width: auto;
+    height: auto;
+    z-index: 0;
+}
+
+.GPSButton {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    font-size: 2.5vh;
+    padding: 8px 16px;
+    border: 1px solid #007bff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.GPSButton:hover {
+    background: rgba(0, 123, 255, 0.4);
+}
+
+.GPSButton.Active {
+    background: rgba(0, 255, 0, 0.3);
+    border-color: #00ff00;
+    color: #0f0;
+    font-weight: bold;
+}
+
+/* Panel de datos GPS */
+.GPSPanel {
+    position: absolute;
+    bottom: 20vh;
+    left: 0;
+    background: rgba(0, 0, 0, 0.75);
+    color: #0f0;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-family: monospace;
+    font-size: 14px;
+    z-index: 0;
+    min-width: 240px;
+}
+
+.GPSPanel-Title {
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #0f0;
+}
+
+.GPSPanel-Error {
+    color: #f55;
+    white-space: pre-line;
+}
+
+
+/* ============================================================ */
+/* 📱 MEDIA QUERIES (max-width: 768px) */
+/* ============================================================ */
+@media(max-width: 1200px) {
+    .OptionMapa {
+        bottom: 16vh;
+    }
+}
+
+@media(max-width: 768px) {
+    .divSidebar {
+        width: 100% !important;
+        height: 90vh;
+    }
+
+    .Searche {
+        width: 50%;
+    }
+
+    .divSidebarHidden {
+        left: -100%;
+    }
+
+    .OptionMapaFullScreen {
+        width: 100%;
+    }
+
+    .OptionMapa {
+        bottom: 10vh;
+        left: 0;
+    }
+
+    .SidebarMapa {
+        width: 100%;
+        justify-content: start;
+        overflow: auto;
+    }
+
+    .divMenuBtn>button {
+        font-size: 2vh;
+    }
+
+    .divContetMenuMapa {
+        width: 200%;
+    }
+
+    .ModoRecorrer>label {
+        margin-right: 1vh;
+    }
+
+    .SpeedControl>button {
+        margin: 0 1vh;
+    }
+
+    .SpeedControl {
+        width: 100%;
+        left: auto;
+    }
+
+    .SpeedControl>button,
+    .SpeedControl>span {
+        margin: 0 2.5px;
+        font-size: 2vh;
+    }
+
+    .ModoRecorrer>button,
+    .ModoRecorrer>label {
+        font-size: 2vh;
+        margin: 0 0;
+    }
+}

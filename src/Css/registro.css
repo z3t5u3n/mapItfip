@@ -1,0 +1,200 @@
+/* Paleta de Colores */
+:root {
+    --color-azul: #007bff;   /* Azul estándar */
+    --color-rojo: #dc3545;   /* Rojo estándar */
+    --color-blanco: #ffffff; /* Blanco */
+    --color-negro: #343a40;  /* Negro (gris oscuro para texto) */
+    --color-gris-claro: #f8f9fa; /* Gris muy claro para fondos sutiles */
+    --color-borde: #ced4da; /* Gris para bordes de inputs */
+}
+
+/* Estilos Generales */
+.divRegistro, .divLogin {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-blanco);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;  /*Para apilar Header y contenido */
+    align-items: center;
+    min-height: 100vh; /* Asegura que ocupe al menos toda la altura de la vista */
+}
+
+/* Contenedor Principal del Registro */
+.divRegistro, .divLogin {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Estilos para el Header (ejemplo, ajusta si tu Header es diferente) */
+.header { /* Asume que tu componente Header tiene esta clase */
+    background-color: var(--color-azul);
+    color: var(--color-blanco);
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    font-size: 1.8em;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px; /* Espacio debajo del header */
+}
+
+/* Contenedor del Formulario */
+.divContentForm, .divContentLogin {
+    background-color: var(--color-blanco);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Sombra más pronunciada */
+    width: 90%;
+    max-width: 550px; /* Ancho máximo para el formulario */
+    box-sizing: border-box;
+    margin-top: 20px;
+    margin-bottom: 30px; /* Espacio inferior */
+}
+
+.divForm {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Aumenta el espacio entre secciones */
+}
+
+.divForm h3 {
+    color: var(--color-negro);
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    border-bottom: 2px solid var(--color-azul); /* Línea divisoria */
+    padding-bottom: 10px;
+}
+
+/* Estilos para Selects e Inputs */
+.selectRol,
+.formSection input[type="text"],
+.formSection input[type="email"],
+.formSection select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--color-borde);
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    color: var(--color-negro);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.selectRol:focus,
+.formSection input:focus,
+.formSection select:focus {
+    border-color: var(--color-azul); /* Borde azul al enfocar */
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Sombra azul al enfocar */
+    outline: none; /* Elimina el contorno por defecto del navegador */
+}
+
+.selectRol {
+    background-color: var(--color-blanco);
+    color: var(--color-negro);
+    font-weight: bold;
+    border: 2px solid var(--color-azul); /* Borde más fuerte para el selector principal */
+}
+
+/* Sección de Formulario Desplegada */
+.formSection {
+    position: relative;
+    border: 1px solid var(--color-borde);
+    padding: 25px;
+    border-radius: 8px;
+    background-color: var(--color-gris-claro);
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre inputs dentro de la sección */
+    animation: fadeIn 0.5s ease-out; /* Animación de aparición */
+}
+
+/* Animación para el deslice (aparecer) */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Botón de Enviar */
+.submitButton {
+    background-color: var(--color-azul);
+    color: var(--color-blanco);
+    padding: 14px 25px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    align-self: center; /* Centra el botón horizontalmente */
+    margin-top: 25px;
+    width: fit-content;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submitButton:hover {
+    background-color: #0056b3; /* Azul más oscuro al pasar el ratón */
+    transform: translateY(-2px); /* Pequeño efecto de elevación */
+}
+
+.submitButton:active {
+    background-color: #004085; /* Azul aún más oscuro al hacer clic */
+    transform: translateY(0);
+}
+
+/* Responsividad básica */
+@media (max-width: 600px) {
+    .divContentForm {
+        padding: 20px;
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .divForm h3 {
+        font-size: 1.3em;
+    }
+
+    .selectRol,
+    .formSection input,
+    .formSection select,
+    .submitButton {
+        font-size: 0.95em;
+        padding: 10px 12px;
+    }
+}
+/* registro.css */
+
+/* Estilo para resaltar inputs con error */
+.input-error {
+    border: 2px solid red;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+/* Estilo para los mensajes de error */
+.error-message {
+    color: red;
+    font-size: 0.85em;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+.btnRegistrar{
+    font-size: 2.5vh;
+    margin: 0 auto;
+    width: 20%;
+    border: none;
+    /* border-bottom: 1px solid blue; */
+    color: blue;
+    cursor: pointer;
+    background: transparent;
+}

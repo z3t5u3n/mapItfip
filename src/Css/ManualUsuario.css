@@ -1,0 +1,157 @@
+/*Global*/
+button {
+    cursor: pointer;
+}
+
+/*Clases o id*/
+.divFondoManual,
+.divManualUsuario {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+}
+
+.divManualUsuario {
+    z-index: 4;
+}
+
+.divFondoManual {
+    z-index: 2;
+    background: rgba(0, 0, 0, .5);
+}
+
+.divAvatar {
+    position: absolute;
+    right: 0;
+    width: auto;
+    height: auto;
+    top: 22vh;
+}
+
+/* Base style for the avatar image */
+.imgAvatar {
+    padding: 10px 20px;
+    width: 400px;
+    height: 400px;
+    transition: transform 0.5s ease;
+    /* Add transition for smooth flipping */
+}
+
+.divAvatar-1 {
+    left: -4vh;
+    right: auto;
+}
+
+/* Class to flip the avatar */
+.imgAvatar-1 {
+    transform: scaleX(-1);
+    /* Ensure it's not fighting with the `right: 0` from .imgAvatar */
+}
+
+.divMensaje {
+    background: rgba(0, 0, 0, .5);
+    padding: 10px 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    position: absolute;
+    top: 45%;
+    font-size: 3vh;
+    color: white;
+    text-shadow: var(--Sombra_1);
+    text-align: center;
+}
+
+.divMensaje>p {
+    margin: 10px 0;
+}
+
+b {
+    text-shadow: var(--Sombra_2);
+}
+
+/* Specific positions for messages */
+.divMensaje-1,
+.divMensaje-2 {
+    left: 40%;
+}
+
+.divMensaje-3,
+.divMensaje-4,
+.divMensaje-5,
+.divMensaje-6,
+.divMensaje-7,
+.divMensaje-8 {
+    left: 30%;
+}
+
+.divMensaje p {
+    font-size: 3vh;
+    color: white;
+    text-shadow: var(--Sombra_1);
+    text-align: center;
+}
+
+.Resaltar {
+    text-shadow: var(--Sombra_2);
+}
+
+.btnNext {
+    padding: 5px 20px;
+    position: absolute;
+    bottom: -2.5vh;
+    right: 2vh;
+    background: blue;
+    font-size: 3vh;
+    border: none;
+    border-bottom: 1px solid black;
+    border-radius: 10px;
+    color: white;
+}
+
+@media(max-Width: 768px) {
+
+    /* .divManualUsuario,.divFondoManual{
+        display: none;
+    } */
+    .divMensaje-1,
+    .divMensaje-2,
+    .divMensaje-3,
+    .divMensaje-4,
+    .divMensaje-5,
+    .divMensaje-6,
+    .divMensaje-7,
+    .divMensaje-8 {
+        left: auto;
+    }
+
+    .divMensaje {
+        width: 100%;
+        top: auto;
+        bottom: 1vh;
+    }
+
+    .divMensaje>p {
+        font-size: 2vh;
+    }
+    .divMensaje p{
+        text-align: justify;
+    }
+    .btnNext {
+        right: auto;
+        right: 0.5vh;
+        bottom: auto;
+        bottom: 1vh;
+    }
+
+    .divAvatar {
+        top: auto;
+        bottom: -5vh;
+        right: 0;
+    }
+
+    .imgAvatar {
+        width: 300px;
+        height: 300px;
+    }
+}
