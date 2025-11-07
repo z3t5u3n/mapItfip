@@ -6,7 +6,9 @@ build/
 
 # Unity Assets (si no están en la carpeta 'build')
 #public/Unity/Build/ 
-.env
+public/Model
+public/media
+#.env
 
 # Archivos de lock
 package-lock.json
