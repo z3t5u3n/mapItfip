@@ -161,7 +161,7 @@ const Mapa = memo(function Mapa({ userData, isIcon, isSidebar, fullScreen }) {
     Object.values(grupos).flatMap((items) => items)
   );
 
-  const isExternalUser = userData && userData.IdRol !== 1; // valor original = 1
+  const isExternalUser = userData && userData.IdRol === 0; // valor original = 1
   const normalizedSearchQuery = normalizeString(searchQuery);
   const normalizedTargetSalon = normalizeString("Salón");
 
