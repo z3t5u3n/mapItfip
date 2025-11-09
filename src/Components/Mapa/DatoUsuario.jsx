@@ -273,11 +273,11 @@ function DatoUsuario({ userData, isSidebar, onUserUpdate }) {
             <div className="contentDatoUsuario">
                 <h2>Detalles del Usuario</h2>
                 {NumeroDocumento && <p><strong>Documento:</strong> {NumeroDocumento}</p>}
-                {Nombre && <p><strong>Nombre:</strong> {Nombre}</p>}
+                {Nombre && <p><strong>Nombre:</strong> {Nombres}</p>}
                 {Apellidos && <p><strong>Apellidos:</strong> {Apellidos}</p>}
                 {selectedRoleId && <p><strong>Rol Actual:</strong> {rolesMap[selectedRoleId] || 'Desconocido'}</p>}
 
-                <div className="role-selector-container">
+            {/*<div className="role-selector-container">
                     <label htmlFor="role-select">Cambiar Rol:</label>
                     <select
                         id="role-select"
@@ -289,7 +289,7 @@ function DatoUsuario({ userData, isSidebar, onUserUpdate }) {
                             <option key={id} value={id}>{name}</option>
                         ))}
                     </select>
-                </div>
+                </div>*/}
 
                 {isSpecializedRole && selectedRoleId !== 1 && (
                     <p className="info-message">
