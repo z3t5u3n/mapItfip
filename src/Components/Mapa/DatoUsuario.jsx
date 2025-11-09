@@ -69,7 +69,7 @@ function DatoUsuario({ userData, isSidebar, onUserUpdate }) {
         );
     }
 
-    const { NumeroDocumento, Nombre, Apellidos } = userData;
+    const { NumeroDocumento, Nombres, Apellidos } = userData;
 
     const handleRoleChange = (e) => {
         const newRoleId = parseInt(e.target.value);
@@ -273,7 +273,7 @@ function DatoUsuario({ userData, isSidebar, onUserUpdate }) {
             <div className="contentDatoUsuario">
                 <h2>Detalles del Usuario</h2>
                 {NumeroDocumento && <p><strong>Documento:</strong> {NumeroDocumento}</p>}
-                {Nombre && <p><strong>Nombre:</strong> {Nombre}</p>}
+                {Nombres && <p><strong>Nombres:</strong> {Nombres}</p>}
                 {Apellidos && <p><strong>Apellidos:</strong> {Apellidos}</p>}
                 {selectedRoleId && <p><strong>Rol Actual:</strong> {rolesMap[selectedRoleId] || 'Desconocido'}</p>}
 
