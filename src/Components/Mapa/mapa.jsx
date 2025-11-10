@@ -3,15 +3,16 @@ import { Unity, useUnityContext } from "react-unity-webgl";
 import icoPantallaCompleta from "../../media/fullScreen.png";
 import icoPantallaNorma from "../../media/normalScreen.png";
 import ReportMapError from "./ReportMapError";
+import camelia_gif00 from "../../media/Camelia_gif00.gif";
 
 // import "../../Css/mapa.css";
 
 const Mapa = memo(function Mapa({ userData, isIcon, isSidebar, fullScreen }) {
   const { unityProvider, sendMessage, isLoaded, loadingProgress } = useUnityContext({
     loaderUrl: "/Unity/Build/prueba.loader.js",
-    dataUrl: "/Unity/Build/prueba.data.br",
-    frameworkUrl: "/Unity/Build/prueba.framework.js.br",
-    codeUrl: "/Unity/Build/prueba.wasm.br",
+    dataUrl: "/Unity/Build/prueba.data",
+    frameworkUrl: "/Unity/Build/prueba.framework.js",
+    codeUrl: "/Unity/Build/prueba.wasm",
   });
 
   // 🔹 Estados
@@ -23,6 +24,10 @@ const Mapa = memo(function Mapa({ userData, isIcon, isSidebar, fullScreen }) {
   const [isAutomaticMode, setIsAutomaticMode] = useState(false);
   const [cameraSpeed, setCameraSpeed] = useState(1);
   const [showReport, setShowReport] = useState(false);
+  
+  // ⚡ NUEVOS ESTADOS PARA CARGA FIJA DE 6 SEGUNDOS ⚡
+  const [fakeLoadProgress, setFakeLoadProgress] = useState(0);
+  const [isFakeLoadDone, setIsFakeLoadDone] = useState(false);
 
   // Detectar si hay usuario logeado
   const isLogged = !!localStorage.getItem("authToken");
@@ -61,6 +66,44 @@ const Mapa = memo(function Mapa({ userData, isIcon, isSidebar, fullScreen }) {
   // **NUEVO:** Referencia para el input de búsqueda
   const searchInputRef = useRef(null);
   const speedOptions = [1, 2, 3, 4];
+
+  // ⚡ LÓGICA DEL TEMPORIZADOR DE CARGA FIJA (6 SEGUNDOS) ⚡
+  useEffect(() => {
+    // Si la carga real de Unity ya terminó, no iniciamos la carga falsa.
+    if (isLoaded) return;
+    
+    // Calcula cuántas veces se debe actualizar el progreso (ej: 60 veces en 6 segundos)
+    const totalDuration = 6000; // 6 segundos
+    const intervalTime = 100;    // 100ms
+    const totalSteps = totalDuration / intervalTime;
+    const progressPerStep = 100 / totalSteps;
+    
+    // 1. Inicia el intervalo para simular el progreso
+    const interval = setInterval(() => {
+      setFakeLoadProgress((prevProgress) => {
+        const newProgress = prevProgress + progressPerStep;
+        if (newProgress >= 100) {
+          // No debe detenerse aquí, solo limitarse
+          return 100;
+        }
+        return newProgress;
+      });
+    }, intervalTime);
+
+    // 2. Establece un timeout para finalizar la carga falsa después de 6 segundos
+    const timeout = setTimeout(() => {
+      clearInterval(interval);
+      setFakeLoadProgress(100);
+      setIsFakeLoadDone(true); // Marca que la animación de 6s ha terminado
+    }, totalDuration);
+
+    // 3. Cleanup: Limpia el intervalo y el timeout si el componente se desmonta o Unity carga
+    return () => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    };
+  }, [isLoaded]); // Dependencia de isLoaded: si es true, detiene el temporizador.
+
 
   // 🧭 Lógica movimiento cámara
   useEffect(() => {
@@ -161,7 +204,7 @@ const Mapa = memo(function Mapa({ userData, isIcon, isSidebar, fullScreen }) {
     Object.values(grupos).flatMap((items) => items)
   );
 
-  const isExternalUser = userData && userData.IdRol === 1;
+  const isExternalUser = userData && userData.IdRol === 0; // valor original = 1
   const normalizedSearchQuery = normalizeString(searchQuery);
   const normalizedTargetSalon = normalizeString("Salón");
 
@@ -237,13 +280,36 @@ const Mapa = memo(function Mapa({ userData, isIcon, isSidebar, fullScreen }) {
       return newState;
     });
   }, [isLoaded, sendMessage, isCameraMoving]);
+  
+  // 💡 Lógica de renderizado del overlay: Se muestra si Unity no ha cargado O la carga falsa no ha terminado.
+  const showLoadingOverlay = !isLoaded || !isFakeLoadDone; 
+  
+  // La barra de progreso siempre usa el valor de la carga falsa (de 0 a 100)
+  const displayPercentage = Math.round(fakeLoadProgress);
 
   return (
     <div className={`divMapa ${isIcon ? "divMapa-1" : ""}`}>
-      {/* Cargando */}
-      {!isLoaded && (
+      {/* Cargando: Ahora se muestra si Unity no ha cargado O la animación no ha terminado */}
+      {showLoadingOverlay && (
         <div className="unity-loading-overlay">
-          <p>Cargando mapa... {Math.round(loadingProgress * 100)}%</p>
+          <img src={camelia_gif00} alt="Imagen de carga" className="img_carga00"/>
+          <div className="loading-content">
+            
+            <div className="loading-bar-container">
+              <div
+                className="loading-bar-fill"
+                style={{ 
+                    // Usamos el progreso de 0 a 100 de la animación fija
+                    width: `${displayPercentage}%` 
+                }}
+              ></div>
+            </div>
+            
+            {/* Si Unity ya cargó (isLoaded=true) pero la animación sigue, muestra 100% */}
+            <p className="loading-message">
+                Cargando mapa... {isLoaded && !isFakeLoadDone ? 100 : displayPercentage}%
+            </p>
+          </div>
         </div>
       )}
 

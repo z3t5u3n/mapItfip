@@ -18,6 +18,74 @@
     height: 100vh;
 }
 
+.unity-loading-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /* ⚡ CAMBIOS AQUÍ: Alineación para apilar imagen y mensaje/spinner ⚡ */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* Apila elementos verticalmente */
+    background: rgba(0, 0, 0, 0.8);
+    /* Fondo oscuro para el overlay */
+    z-index: 10;
+    /* Asegura que esté sobre todo */
+}
+
+.img_carga00 {
+    border-radius: 10px;
+    width: 70%;
+    height: 70%;
+    max-width: 800px;
+    /* Limita el tamaño de la imagen */
+    max-height: 800px;
+    object-fit: contain;
+    /* Asegura que la imagen se vea bien */
+}
+
+/* 🆕 NUEVOS ESTILOS PARA EL CONTENIDO DE CARGA (SPINNER Y MENSAJE) */
+.loading-content {
+    position: absolute;
+    bottom: 13.5vh;
+    right: 26vw;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-size: 2.5vh;
+}
+
+.loading-spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #007bff;
+    /* Color del spinner */
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+.loading-message {
+    margin: 0;
+    margin-left: 10px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+}
+
+/* Animación para el spinner */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 /* El componente Unity se renderiza directamente, estas reglas podrían no ser necesarias si lo usas directamente */
 /* .divUnityRender .ConteinerUnity .Unity {
     position: relative;
@@ -462,6 +530,22 @@
 }
 
 @media(max-width: 768px) {
+
+    .img_carga00 {
+        border-radius: 10px;
+        width: 100%;
+        height: 60vh;
+        object-fit: contain;
+        /* Asegura que la imagen se vea bien */
+    }
+
+    /* 🆕 NUEVOS ESTILOS PARA EL CONTENIDO DE CARGA (SPINNER Y MENSAJE) */
+    .loading-content {
+        bottom: 27.5vh;
+        right: 5px;
+    }
+
+
     .divSidebar {
         width: 100% !important;
         height: 90vh;
