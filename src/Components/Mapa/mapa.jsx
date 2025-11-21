@@ -10,9 +10,9 @@ import camelia_gif00 from "../../media/Camelia_gif00.gif";
 const Mapa = memo(function Mapa({ userData, isIcon, isSidebar, fullScreen }) {
   const { unityProvider, sendMessage, isLoaded, loadingProgress } = useUnityContext({
     loaderUrl: "/Unity/Build/prueba.loader.js",
-    dataUrl: "/Unity/Build/prueba.data.br",
-    frameworkUrl: "/Unity/Build/prueba.framework.js.br",
-    codeUrl: "/Unity/Build/prueba.wasm.br",
+    dataUrl: "/Unity/Build/prueba.data",
+    frameworkUrl: "/Unity/Build/prueba.framework.js",
+    codeUrl: "/Unity/Build/prueba.wasm",
   });
 
   // 🔹 Estados
@@ -123,6 +123,7 @@ const Mapa = memo(function Mapa({ userData, isIcon, isSidebar, fullScreen }) {
           D: data.bloqueD || {},
           E: data.bloqueE || {},
         });
+        console.log(bloquesData)
       } catch (error) {
         console.error("❌ Error al procesar datos:", error);
       }
