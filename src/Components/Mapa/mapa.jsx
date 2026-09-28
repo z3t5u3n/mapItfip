@@ -292,28 +292,7 @@ const Mapa = memo(function Mapa({ userData, isIcon, isSidebar, fullScreen }) {
   return (
     <div className={`divMapa ${isIcon ? "divMapa-1" : ""}`}>
       {/* Cargando: Ahora se muestra si Unity no ha cargado O la animación no ha terminado */}
-      {showLoadingOverlay || (
-        <div className="unity-loading-overlay">
-          <img src={camelia_gif00} alt="Imagen de carga" className="img_carga00"/>
-          <div className="loading-content">
-            
-            <div className="loading-bar-container">
-              <div
-                className="loading-bar-fill"
-                style={{ 
-                    // Usamos el progreso de 0 a 100 de la animación fija
-                    width: `${displayPercentage}%` 
-                }}
-              ></div>
-            </div>
-            
-            {/* Si Unity ya cargó (isLoaded=true) pero la animación sigue, muestra 100% */}
-            <p className="loading-message">
-                Cargando mapa... {isLoaded && !isFakeLoadDone ? 100 : displayPercentage}%
-            </p>
-          </div>
-        </div>
-      )}
+      
 
       {/* Canvas Unity */}
       <Unity
