@@ -292,7 +292,7 @@ const Mapa = memo(function Mapa({ userData, isIcon, isSidebar, fullScreen }) {
   return (
     <div className={`divMapa ${isIcon ? "divMapa-1" : ""}`}>
       {/* Cargando: Ahora se muestra si Unity no ha cargado O la animación no ha terminado */}
-      {showLoadingOverlay && (
+      {showLoadingOverlay || (
         <div className="unity-loading-overlay">
           <img src={camelia_gif00} alt="Imagen de carga" className="img_carga00"/>
           <div className="loading-content">
